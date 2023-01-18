@@ -1,0 +1,23 @@
+{% extends 'recipes/base.html' %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Usuń przepis</title>
+</head>
+<body>
+{% block page_header %}
+<div class="mt-4 p-5 bg-light text-dark rounded">
+  <form method="POST">
+        {% csrf_token %}
+        <p class="lead">Czy na pewno chcesz usunąć komentarz "{{ comment.content }}"? </p>
+        <a style="float:left;" class="btn btn-success me-2" href="{% url 'recipes:show_recipes' %}"> &laquo; Powrót</a>
+        <input class="btn btn-danger" type="submit" value="Usuń"/>
+    </form>
+</div>
+{% endblock page_header %}
+
+{% block content %}
+{% endblock content %}
+</body>
+</html>

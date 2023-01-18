@@ -1,0 +1,54 @@
+{% extends 'recipes/base.html' %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ recipe }}</title>
+</head>
+<body>
+{% block content %}
+<div class="my-4 p-5 bg-light text-dark rounded" >
+    <a class="btn btn-success" href="{% url 'recipes:show_recipes' %}" role="button"> &laquo; Powrót</a>
+    {% if recipe.user == request.user %}
+        <a style='float:right;' class="btn btn-success" href="{% url 'recipes:update_recipe' recipe.id %}" role="button">Edytuj &raquo;</a>
+    {% endif %}
+    <div class="text-center mb-5">
+      <h2>{{ recipe.title }}</h2>
+  </div>
+    <img class="img-fluid img-thumbnail mx-auto d-block mb-5" src="{{ recipe.image.url }}" style="width:500px;height:700px;" alt="Card image tap">
+    <b>Przepis użytkownika:</b> {{ recipe.user|escape|linebreaks }}
+    <b>Kategoria:</b> {{ recipe.category|escape|linebreaks }}
+    <b>Poziom trudności:</b> {{ recipe.level|escape|linebreaks }}
+    <b>Czas przygotowania:</b> {{ recipe.preparation_time|escape|linebreaks }}
+    <b>Ilość porcji:</b> {{ recipe.servings|escape|linebreaks }}
+    <b>Składniki:</b> {{ recipe.ingredients|escape|linebreaks }}
+    <b>Przygotowanie:</b> {{ recipe.content|escape|linebreaks }}
+    {% if recipe.user == request.user %}
+    <a style='float:right;' class="btn btn-danger" href="{% url 'recipes:recipe-delete' recipe.id %}" role="button">Usuń przepis &raquo;</a>
+    {% endif %}
+</div>
+<div class="my-4 p-5 bg-light text-dark rounded" >
+  <div class="text-center mb-2">
+      <h2>Komentarze</h2>
+  </div>
+
+  {% if recipe.recipes.all %}
+        {% for comment in recipe.recipes.all %}
+            {% if comment.user == request.user %}
+                <a style='float:right;' class="btn btn-danger" href="{% url 'recipes:comment-delete' comment.id %}" role="button">Usuń komentarz</a>
+            {% endif %}
+            <p><strong>{{ comment.user }}</strong> - <i>{{ comment.publication_date }}</i></p>
+            <p>{{ comment.content }}</p>
+        {% endfor %}
+  {% else %}
+        <p>Nie dodano żadnych komentarzy...</p>
+  {% endif %}
+  {% if user.is_authenticated %}
+        <p><a class="btn btn-success" href="{% url 'recipes:add_comment' recipe.id %}" role="button">Dodaj komentarz </a></p>
+    {% else %}
+        <p><a class="btn btn-success" href="{% url 'users:login' %}" role="button">Zaloguj się, żeby dodać komentarz</a></p>
+    {% endif %}
+</div>
+{% endblock content %}
+</body>
+</html>

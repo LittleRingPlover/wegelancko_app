@@ -1,0 +1,109 @@
+
+<html lang="en">
+  <head>
+    {% load bootstrap5 %}
+
+    {% bootstrap_css %}
+
+    {% bootstrap_javascript %}
+
+    {% bootstrap_messages %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Wegelancko</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  </head>
+  <body style="background-color: rgb(219, 217, 217)">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-2 py-4">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'recipes:index' %}">Wegelancko</a>
+        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'recipes:show_my_recipes' %}">Moje przepisy</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'recipes:show_recipes' %}">Eksploruj</a>
+            </li>
+          </ul>
+          <form action="{% url 'recipes:search_recipe' %}" method="get" class="d-flex navbar-nav mr-auto ml-auto" role="search">
+            <input class="form-control me-2" type="search" name="query" placeholder="Co dziś jemy?" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Szukaj</button>
+          </form>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            {% if user.is_authenticated %}
+              <a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="navbar-text">Cześć, {{ user.username }}.</a>
+              <a class="nav-link" href="{% url 'users:logout' %}">Wyloguj</a>
+            {% else %}
+              <a class="nav-link" href="{% url 'users:login' %}">Zaloguj</a>
+              <a class="nav-link" href="{% url 'users:register' %}">Zarejestruj</a>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main role="main" class="container">
+      <div class="pb-2 mb-2 text-dark">
+        {% block page_header %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        {% endblock page_header %}
+      </div>
+      <div class="text-dark">
+        {% block content %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+        {% endblock content %}
+      </div>
+    </main>
+
+
+
+<!--  <nav class="navbar navbar-expand-sm bg-light">-->
+<!--  <div class="container-fluid">-->
+<!--    <a class="navbar-brand" href="{% url 'recipes:index' %}">Wegelancko</a>-->
+<!--    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--      <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link active" aria-current="page" href="#">Home</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item">-->
+<!--          <a class="nav-link" href="#">Link</a>-->
+<!--        </li>-->
+<!--        <li class="nav-item dropdown">-->
+<!--          <a class="nav-link dropdown-toggle" href="{% url 'recipes:index' %}" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            Kategorie-->
+<!--          </a>-->
+<!--          <ul class="dropdown-menu">-->
+<!--            <li><a class="dropdown-item" href="{% url 'recipes:index' %}">Śniadania</a></li>-->
+<!--            <li><a class="dropdown-item" href="{% url 'recipes:index' %}">Przystawki</a></li>-->
+<!--            <li><a class="dropdown-item" href="{% url 'recipes:index' %}">Dania główne</a></li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--      <form class="d-flex" role="search">-->
+<!--        <input class="form-control me-2" type="search" placeholder="Na co masz dziś ochotę?" aria-label="Search">-->
+<!--        <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--      </form>-->
+
+<!--      {% if user.is_authenticated %}-->
+<!--        <a data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show" class="navbar-text">Cześć, {{ user.username }}.</a>-->
+<!--        <a class="nav-link" href="{% url 'users:logout' %}">Wyloguj</a>-->
+<!--      {% else %}-->
+<!--        <a class="nav-link" href="{% url 'users:login' %}">Zaloguj</a>-->
+<!--        <a class="nav-link" href="/">Zarejestruj</a>-->
+<!--      {% endif %}-->
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->
+  </body>
+</html>

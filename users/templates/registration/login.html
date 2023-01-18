@@ -1,0 +1,29 @@
+{% extends 'recipes/base.html' %}
+{% load bootstrap5 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zaloguj się</title>
+</head>
+<body>
+{% block content %}
+
+<div class="mb-5" align="center"><h2>Zaloguj się</h2></div>
+
+<form method="post" action="{% url 'users:login' %}" class="form">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+  {% buttons %}
+    <button name="submit" class="btn btn-success">Zaloguj &raquo;</button>
+  {% endbuttons %}
+  <input type="hidden" name="next"
+  value="{% url 'recipes:index' %}"/>
+</form>
+{% endblock content %}
+</body>
+</html>
+
+
+
+
+

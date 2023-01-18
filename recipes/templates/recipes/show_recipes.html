@@ -1,0 +1,96 @@
+{% extends 'recipes/base.html' %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+{% block page_header %}
+<div class="mt-4 p-5 bg-light text-dark rounded" style="text-align:center">
+    <div class="text-center mb-5"><h2>Wegelanckie kategorie</h2></div>
+    <p><a class="btn btn-lg btn-success my-1" href="{% url 'recipes:show_recipes' %}" role="button">Wszystkie przepisy</a></p>
+    {% for category in categories %}
+    <a class="btn btn-lg btn-success my-1" href="{% url 'recipes:show_recipes' %}?categories={{ category.id }}" role="button">{{ category.title }}</a>
+    {% endfor %}
+</div>
+{% endblock page_header %}
+{% block content %}
+
+{% if filtered_recipes %}
+
+    <div class="container">
+        <div class="row justify-content-center row-cols-1 row-cols-md-3 g-4">
+
+        {% for recipe in filtered_recipes %}
+            <div class="col" align="center">
+              <div class="card m-3" style="width: 20rem;" align="left">
+                  <img src="{{ recipe.image.url }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title m-1">{{ recipe.title }}</h5>
+                    <h6 class="card-subtitle m-1">{{ recipe.user }}</h6>
+                    <a style='float:right;' href="{% url 'recipes:show_recipe' recipe.id %}" class="btn btn-success">Szczegóły &raquo;</a>
+                  </div>
+                  <div class="card-footer text-muted text-center">{{ recipe.preparation_time }}, {{ recipe.servings }}
+                  </div>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+{% else %}
+    <div class="my-3"><h5>Obecnie nie ma żadnych przepisów w danej kategorii.</h5></div>
+    <div>
+        {% if user.is_authenticated %}
+        <a class="btn btn-lg btn-success" href="{% url 'recipes:add_recipe' %}" role="button">Dodaj przepis &raquo;</a>
+    {% else %}
+        <a class="btn btn-lg btn-success" href="{% url 'users:login' %}" role="button">Zaloguj się, żeby dodać przepis &raquo;</a>
+    {% endif %}
+    </div>
+{% endif %}
+
+<div class="row m-5">
+    <div class="col-md-12 m-3">
+
+        {% if filtered_recipes.has_other_pages %}
+            <ul class="pagination justify-content-center">
+                {% if filtered_recipes.has_previous %}
+                    <li class="page-item">
+                        <a href="?page={{ filtered_recipes.previous_page_number }}" class="page-link">&laquo;</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a href="?page=1" class="page-link">&laquo;</a>
+                    </li>
+                {% endif %}
+
+                {% for i in filtered_recipes.paginator.page_range %}
+                    {% if filtered_recipes.number == i %}
+                        <li class="page-item active">
+                            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a href="?page={{ i }}" class="page-link">{{ i }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if filtered_recipes.has_next %}
+                    <li class="page-item">
+                        <a href="?page={{ filtered_recipes.next_page_number }}" class="page-link">&raquo;</a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <a href="?page={{ filtered_recipes.paginator.number_pages }}" class="page-link">&raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}
+</body>
+</html>

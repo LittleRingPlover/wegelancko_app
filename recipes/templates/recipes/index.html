@@ -1,0 +1,74 @@
+{% extends 'recipes/base.html' %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wegelancko</title>
+</head>
+<body>
+{% block page_header %}
+<div class="mt-4 p-5 bg-light text-dark rounded" style="text-align:center">
+    {% if user.is_authenticated %}
+      <h1 class="display-3 pb-3">Cześć, {{ user.username }}!</h1>
+      <a class="btn btn-lg btn-success" href="{% url 'recipes:show_my_recipes' %}" role="button">Moje przepisy &raquo;</a>
+      <a class="btn btn-lg btn-success" href="{% url 'recipes:add_recipe' %}" role="button">Dodaj przepis &raquo;</a>
+      <a class="btn btn-lg btn-success" href="{% url 'recipes:show_recipes' %}" role="button">Eksploruj &raquo;</a>
+    {% else %}
+    <div class="p-2 bg-light text-dark rounded">
+      <h1 class="display-3 pb-3">Cześć!</h1>
+      <p class="lead">Zaloguj się do Wegelancko i zacznij swoją wegańską przygodę
+        in an elegant way. Bo czemu nie? :)</p>
+      <a class="btn btn-lg btn-success me-2" href="{% url 'users:register' %}" role="button">Zarejestruj się &raquo;</a>
+      <a class="btn btn-lg btn-success my-1" href="{% url 'users:login' %}" role="button">Zaloguj się &raquo;</a>
+      <p class="lead pt-3"> Możesz też przeglądać przepisy innych bez zakładania konta. Do dzieła!</p>
+      <a class="btn btn-lg btn-success my-1" href="{% url 'recipes:show_recipes' %}" role="button">Eksploruj! &raquo;</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="mt-4 p-5 bg-light text-dark rounded" >
+    <div class="text-center mb-3"><h2>Ostatnio dodane przepisy</h2></div>
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{{ first_recipe.image.url }}" class="d-block w-50 mx-auto d-block" alt="...">
+          <div class="carousel-caption d-none d-md-block text-dark ">
+            <h2><a href="{% url 'recipes:show_recipe' first_recipe.id %}" style="text-decoration: none;" class="text-light badge bg-dark opacity-75">{{ first_recipe.title }}</a></h2>
+            <p class="text-light badge bg-dark opacity-75">{{ first_recipe.preparation_time }}, {{ first_recipe.servings }}</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{{ second_recipe.image.url }}" class="d-block w-50 mx-auto d-block" alt="...">
+          <div class="carousel-caption d-none d-md-block text-dark">
+            <h2><a href="{% url 'recipes:show_recipe' second_recipe.id %}" style="text-decoration: none;" class="text-light badge bg-dark opacity-75">{{ second_recipe.title }}</a></h2>
+            <p class="text-light badge bg-dark opacity-75">{{ second_recipe.preparation_time }}, {{ second_recipe.servings }}</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="{{ third_recipe.image.url }}" class="d-block w-50 mx-auto d-block" alt="...">
+          <div class="carousel-caption d-none d-md-block text-dark ">
+            <h2><a href="{% url 'recipes:show_recipe' third_recipe.id %}" style="text-decoration: none;" class="text-light badge bg-dark opacity-75">{{ third_recipe.title }}</a></h2>
+            <p class="text-light badge bg-dark opacity-75">{{ third_recipe.preparation_time }}, {{ third_recipe.servings }}</p>
+          </div>
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+</div>
+</div>
+{% endblock content %}
+</body>
+</html>

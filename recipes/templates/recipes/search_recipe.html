@@ -1,0 +1,35 @@
+{% extends 'recipes/base.html' %}
+
+{% block content %}
+
+<div class="mb-5" align="center"><h2>Wyniki wyszukiwania</h2></div>
+
+{% if recipes %}
+    <div class="container">
+
+        <div class="row justify-content-center row-cols-1 row-cols-md-3 g-4">
+
+        {% for recipe in recipes %}
+            <div class="col" align="center">
+              <div class="card m-3" style="width: 20rem;" align="left">
+                  <img src="{{ recipe.image.url }}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title m-1">{{ recipe.title }}</h5>
+                    <h6 class="card-subtitle m-1">{{ recipe.user }}</h6>
+                    <a style='float:right;' href="{% url 'recipes:show_recipe' recipe.id %}" class="btn btn-success">Szczegóły &raquo;</a>
+                  </div>
+                  <div class="card-footer text-muted text-center">{{ recipe.preparation_time }}, {{ recipe.servings }}
+                  </div>
+              </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <div class="mb-2" align="center">
+        <p>Brak przepisów spełniających kryteria wyszukiwania...</p>
+    </div>
+
+{% endif %}
+
+{% endblock content %}
