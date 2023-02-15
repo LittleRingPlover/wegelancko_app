@@ -30,7 +30,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://wegelancko.up.railway.app']
+ALLOWED_HOSTS = ['wegelancko.up.railway.app', 'www.wegelancko.up.railway.app']
 CSRF_TRUSTED_ORIGINS = ['https://wegelancko.up.railway.app']
 
 # Application definition
