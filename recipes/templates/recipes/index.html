@@ -28,6 +28,7 @@
 {% endblock page_header %}
 
 {% block content %}
+{% if first_recipe and second_recipe and third_recipe %}
 <div class="mt-4 p-5 bg-light text-dark rounded" >
     <div class="text-center mb-3"><h2>Ostatnio dodane przepisy</h2></div>
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="false">
@@ -67,8 +68,9 @@
         <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
+    </div>
 </div>
-</div>
+{% endif %}
 {% endblock content %}
 </body>
 </html>
