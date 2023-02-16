@@ -88,7 +88,7 @@ def add_recipe(request):
             new_recipe.user = request.user
             new_recipe.save()
 
-            return redirect('recipes:show_recipes')
+            return redirect('recipes:show_my_recipes')
     else:
         form = RecipeForm()
 
