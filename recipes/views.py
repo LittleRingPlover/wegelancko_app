@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from recipes.models import Recipe, Comments, Category
+from .models import Recipe, Comments, Category
 from .forms import RecipeForm, CommentsForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
@@ -33,7 +33,7 @@ def check_recipe_owner(request, recipe):
 
 
 def custom_404(request, exception):
-    return render(request, 'remonty/404.html')
+    return render(request, 'recipes/404.html')
 
 
 def show_recipes(request):
