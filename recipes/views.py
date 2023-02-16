@@ -12,13 +12,12 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def index(request):
-    first_recipe = None
-    second_recipe = None
-    third_recipe = None
-    if first_recipe and second_recipe and third_recipe:
-        first_recipe = Recipe.objects.order_by('-id')[0]
-        second_recipe = Recipe.objects.order_by('-id')[1]
-        third_recipe = Recipe.objects.order_by('-id')[2]
+    if Recipe.objects.count() < 3:
+        return render(request, 'recipes/index.html')
+
+    first_recipe = Recipe.objects.order_by('-id')[0]
+    second_recipe = Recipe.objects.order_by('-id')[1]
+    third_recipe = Recipe.objects.order_by('-id')[2]
 
     context = {
                'first_recipe': first_recipe,
