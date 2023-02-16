@@ -32,6 +32,10 @@ def check_recipe_owner(request, recipe):
         raise Http404
 
 
+def custom_404(request, exception):
+    return render(request, 'remonty/404.html')
+
+
 def show_recipes(request):
     categories = Category.objects.all()
     cat_id = request.GET.get('categories')
