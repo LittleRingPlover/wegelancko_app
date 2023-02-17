@@ -16,7 +16,8 @@
       <h2>{{ recipe.title }}</h2>
   </div>
     <img class="img-fluid img-thumbnail mx-auto d-block mb-5" src="{{ recipe.image.url }}" style="width:500px;height:700px;" alt="Card image tap">
-    <b>Przepis użytkownika:</b> {{ recipe.user|escape|linebreaks }}
+    <b>Przepis dodany przez:</b> {{ recipe.user|escape|linebreaks }}
+    <b>Właściciel przepisu:</b> {{ recipe.owner|escape|linebreaks }}
     <b>Kategoria:</b> {{ recipe.category|escape|linebreaks }}
     <b>Poziom trudności:</b> {{ recipe.level|escape|linebreaks }}
     <b>Czas przygotowania:</b> {{ recipe.preparation_time|escape|linebreaks }}
