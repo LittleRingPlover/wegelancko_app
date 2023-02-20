@@ -6,16 +6,18 @@
     <title>{{ recipe }}</title>
 </head>
 <body>
+{% block page_header %}
+{% endblock page_header %}
 {% block content %}
 <div class="my-4 p-5 bg-light text-dark rounded" >
     <a class="btn btn-success" href="{% url 'recipes:show_recipes' %}" role="button"> &laquo; Powrót</a>
     {% if recipe.user == request.user %}
         <a style='float:right;' class="btn btn-success" href="{% url 'recipes:update_recipe' recipe.id %}" role="button">Edytuj &raquo;</a>
     {% endif %}
-    <div class="text-center mb-5">
+    <div class="text-center mb-5 mt-2">
       <h2>{{ recipe.title }}</h2>
   </div>
-    <img class="img-fluid img-thumbnail mx-auto d-block mb-5" src="{{ recipe.image.url }}" style="width:500px;height:700px;" alt="Card image tap">
+    <img id="image-preview" class="img-fluid img-thumbnail mx-auto d-block mb-5" src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
     <b>Przepis dodany przez:</b> {{ recipe.user|escape|linebreaks }}
     <b>Właściciel przepisu:</b> {{ recipe.owner|escape|linebreaks }}
     <b>Kategoria:</b> {{ recipe.category|escape|linebreaks }}

@@ -3,34 +3,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Tag: {{tag}}</title>
-
-    <style>
-     .page-item.active {
-        background-color: #F00 !important;
-      }
-    </style>
+    <title>Wszystkie przepisy</title>
 
 </head>
 <body>
+{% block page_header %}
+{% endblock page_header %}
 {% block content %}
 <a class="btn btn-lg btn-success" href="{% url 'recipes:add_recipe' %}" role="button">Dodaj przepis &raquo;</a>
-<div class="mb-5" align="center"><h2>Moje przepisy</h2></div>
+<div class="mb-5 mt-2" align="center"><h2>Moje przepisy</h2></div>
 {% if my_recipes %}
 
     <div class="container" align="center">
-        <div class="row justify-content-center row-cols-1 row-cols-md-3 g-4">
+        <div class="row justify-content-center row-cols-1 row-cols-lg-3 g-4">
 
         {% for recipe in my_recipes %}
-            <div class="col" align="center">
-              <div class="card m-3" style="width: 20rem;" align="left">
-                  <img src="{{ recipe.image.url }}" class="card-img-top" alt="...">
+            <div class="col d-flex">
+              <div class="card m-1 w-100" style="height: 700px;" align="left">
+                  <img src="{{ recipe.image.url }}" class="card-img-top w-100" style="height: 500px;" alt="{{ recipe.title }}">
                   <div class="card-body">
                     <h5 class="card-title m-1">{{ recipe.title }}</h5>
                     <h6 class="card-subtitle m-1">{{ recipe.user }}</h6>
                     <a style='float:right;' href="{% url 'recipes:show_recipe' recipe.id %}" class="btn btn-success">Szczegóły &raquo;</a>
                   </div>
-                  <div class="card-footer text-muted text-center">{{ recipe.preparation_time }}, {{ recipe.servings }}
+                  <div class="card-footer text-muted text-center">czas: {{ recipe.preparation_time }}, porcje: {{ recipe.servings }}
                   </div>
               </div>
             </div>

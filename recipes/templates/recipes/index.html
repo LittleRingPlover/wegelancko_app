@@ -10,9 +10,9 @@
 <div class="mt-4 p-5 bg-light text-dark rounded" style="text-align:center">
     {% if user.is_authenticated %}
       <h1 class="display-3 pb-3">Cześć, {{ user.username }}!</h1>
-      <a class="btn btn-lg btn-success" href="{% url 'recipes:show_my_recipes' %}" role="button">Moje przepisy &raquo;</a>
-      <a class="btn btn-lg btn-success" href="{% url 'recipes:add_recipe' %}" role="button">Dodaj przepis &raquo;</a>
-      <a class="btn btn-lg btn-success" href="{% url 'recipes:show_recipes' %}" role="button">Eksploruj &raquo;</a>
+      <a class="btn btn-lg btn-success mb-1" href="{% url 'recipes:show_my_recipes' %}" role="button">Moje przepisy &raquo;</a>
+      <a class="btn btn-lg btn-success mb-1" href="{% url 'recipes:add_recipe' %}" role="button">Dodaj przepis &raquo;</a>
+      <a class="btn btn-lg btn-success mb-1" href="{% url 'recipes:show_recipes' %}" role="button">Eksploruj &raquo;</a>
     {% else %}
     <div class="p-2 bg-light text-dark rounded">
       <h1 class="display-3 pb-3">Cześć!</h1>
